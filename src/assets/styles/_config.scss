@@ -1,0 +1,43 @@
+$primary_purple: #9900ff;
+
+$primary_text_color: rgba(56, 55, 55, 0.801);
+$primary_background: #eeeeee;
+$secondary_purple: #ff00ff;
+$footer_blue: #0f0011;
+$background_purple: #101116;
+$background_image: linear-gradient(#101116, #140b26, #101116);
+
+$footer_image: linear-gradient(#060709, #1f103b);
+
+$border: solid $primary_purple 2px;
+
+@mixin easeOut {
+  transition: all 300ms linear;
+}
+
+@mixin mediaXm {
+  @media screen and (max-width: 380px) {
+    @content;
+  }
+}
+
+@mixin mediaSm {
+  @media screen and (max-width: 500px) {
+    @content;
+  }
+}
+@mixin mediaMd {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+@mixin mediaLg {
+  @media screen and (max-width: 1170px) {
+    @content;
+  }
+}
+@mixin mediaXl {
+  @media screen and (min-width: 1171px) {
+    @content;
+  }
+}

@@ -1,0 +1,9 @@
+@import "../../../assets/styles/config";
+
+.AddCommodityForm {
+  width: 100%;
+
+  @include mediaSm {
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,33 @@
+.EditorIcon {
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+  box-shadow: 0px 1px 11px 1px rgba(15, 15, 15, 0.2);
+  background-color: #34495e;
+  color: #fff;
+  font-size: 12px;
+  font-family: sans-serif;
+  transition: all 250ms ease-in-out;
+  cursor: pointer;
+  min-width: 2rem;
+  border-radius: 4px;
+  margin-top: 3px;
+
+  &:hover {
+    transform: translateY(1px);
+    color: #34495e;
+    background-color: transparent;
+    box-shadow: none;
+    border: 1px solid #34495e;
+  }
+
+  &.isActive {
+    transform: translateY(1px);
+    color: #34495e;
+    background-color: transparent;
+    box-shadow: none;
+    border: 1px solid #34495e;
+  }
+}

@@ -1,0 +1,29 @@
+@import "../../assets/styles/config";
+
+.AdminMenu {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  padding: 1rem;
+  align-items: center;
+  border-right: 2px solid $primary_purple;
+  @include mediaSm {
+    height: 20%;
+    justify-content: center;
+    flex-flow: row wrap;
+    border: none;
+    border-bottom: 2px solid $primary_purple;
+  }
+
+  .AdminMenuLinks {
+    list-style: none;
+    margin: 0.5rem;
+    color: $primary_text_color;
+    text-align: center;
+  }
+
+  .AdminMenuLinkActive {
+    color: $primary_purple;
+  }
+}

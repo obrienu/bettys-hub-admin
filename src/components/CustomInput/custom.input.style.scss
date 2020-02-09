@@ -1,0 +1,52 @@
+@import "../../assets/styles/config";
+
+.CustomInput {
+  width: 80%;
+  position: relative;
+  margin: 1rem auto 0;
+  height: 2rem;
+
+  .CustomInputInput {
+    width: 100%;
+    color: $primary_text_color;
+    background: $primary_background;
+    border: none;
+    display: block;
+    border-bottom: solid 1px $primary_purple;
+    height: 1.5rem;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus {
+      label.CustomInputLabel {
+        top: -1rem;
+        font-size: 0.6rem;
+        color: $secondary_purple;
+        @include mediaMd {
+          top: -1rem;
+        }
+      }
+    }
+  }
+
+  label.CustomInputLabel {
+    width: 100%;
+    font-size: 0.7rem;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+
+    top: 10px;
+    transition: 300ms ease all;
+
+    &.Shrink {
+      top: -1rem;
+      font-size: 0.6rem;
+      color: $secondary_purple;
+      @include mediaMd {
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+@import "../../assets/styles/config";
+
+.RegisterContainer {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  .Register {
+    width: 80%;
+    padding: 1rem;
+    border: $border;
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    @include mediaSm {
+      grid-template-columns: 1fr;
+      grid-template-rows: 0.7fr 1fr;
+      width: 90%;
+    }
+
+    .RegisterName {
+      position: absolute;
+      width: 3.5rem;
+      top: -0.9rem;
+      background: #fff;
+      text-align: center;
+    }
+
+    .RegisterTop {
+      position: relative;
+
+      .AvaterHead {
+        width: 100%;
+
+        text-align: center;
+        .AvaterHeadImage {
+          margin: 0 auto;
+          border-radius: 50%;
+          width: 50%;
+          height: auto;
+        }
+      }
+
+      .RegisterError {
+        margin-top: 1rem;
+        width: 100%;
+        background: rgb(161, 15, 15);
+        color: #fff;
+        text-align: center;
+      }
+    }
+
+    .RegisterForm {
+      flex-flow: column nowrap;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

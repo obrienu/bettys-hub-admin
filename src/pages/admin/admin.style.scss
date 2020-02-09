@@ -1,0 +1,12 @@
+@import "../../assets/styles/config";
+
+.AdminPage {
+  margin: 0.5rem auto;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+
+  @include mediaSm {
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr auto;
+  }
+}
