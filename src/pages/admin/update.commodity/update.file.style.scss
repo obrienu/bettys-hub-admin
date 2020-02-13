@@ -1,0 +1,15 @@
+@import "../../../assets/styles/config";
+
+.AddCommodity{
+  display: grid;
+  grid-template-columns: 2fr max-content;
+
+  .AddCommodityForm {
+    width: 100%;
+  
+    @include mediaSm {
+      margin: 0 auto;
+    }
+  }
+}
+

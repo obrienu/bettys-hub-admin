@@ -7,9 +7,19 @@ const AdminMenu = () => {
     <div className="AdminMenu">
       <li className="AdminMenuLinks">
         <NavLink
+          exact
           activeClassName="AdminMenuLinkActive"
           className="AdminMenuLink"
-          to="/"
+          to="/admin"
+        >
+          Seach Item
+        </NavLink>
+      </li>
+      <li className="AdminMenuLinks">
+        <NavLink
+          activeClassName="AdminMenuLinkActive"
+          className="AdminMenuLink"
+          to="/admin/addcomm"
         >
           Add Commodity
         </NavLink>
@@ -18,27 +28,9 @@ const AdminMenu = () => {
         <NavLink
           activeClassName="AdminMenuLinkActive"
           className="AdminMenuLink"
-          to="/update"
+          to="/admin/addrich"
         >
-          Update Commodity
-        </NavLink>
-      </li>
-      <li className="AdminMenuLinks">
-        <NavLink
-          activeClassName="AdminMenuLinkActive"
-          className="AdminMenuLink"
-          to="/addrich"
-        >
-          Add Longrich Product
-        </NavLink>
-      </li>
-      <li className="AdminMenuLinks">
-        <NavLink
-          activeClassName="AdminMenuLinkActive"
-          className="AdminMenuLink"
-          to="/updaterich"
-        >
-          Update Longrich Product
+          Add Rich Product
         </NavLink>
       </li>
     </div>

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import "./header.style.scss";
 import { userLogout } from "../../redux/user/user.action";
-import { userSelector } from "../../redux/user/user.selector";
+import { userSelector, authSelector } from "../../redux/user/user.selector";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -26,32 +26,43 @@ const Header = props => {
     props.userLogout();
   };
 
+  const authMenu = (
+    <Fragment>
+      <NavItem>
+        <NavLink className="NavLink" to="/auth/register">
+          Register
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink className="NavLink" to="/auth/signin">
+          Sign In
+        </NavLink>
+      </NavItem>
+    </Fragment>
+  );
+
+  const logout = (
+    <Fragment>
+      <NavItem>
+        <NavLink onClick={signOut} className="NavLink" to="#">
+          Sign Out
+        </NavLink>
+      </NavItem>
+    </Fragment>
+  );
+
   return (
     <div>
       <Navbar color="dark" dark expand="md">
         <NavbarBrand to="/">Home</NavbarBrand>
-        <NavbarText className="mr-auto">
+        <NavbarText className="ml-5 mr-auto">
           {" "}
           {props.user ? props.user.username : null}
         </NavbarText>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav navbar>
-            <NavItem>
-              <NavLink className="NavLink" to="/auth/register">
-                Register
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink className="NavLink" to="/auth/signin">
-                Sign In
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink onClick={signOut} className="NavLink" to="#">
-                Sign Out
-              </NavLink>
-            </NavItem>
+          <Nav navbar className="ml-auto">
+            {props.isAuthenticated ? logout : authMenu}
           </Nav>
         </Collapse>
       </Navbar>
@@ -60,7 +71,8 @@ const Header = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  user: userSelector
+  user: userSelector,
+  isAuthenticated: authSelector
 });
 
 const mapDispatchToProps = dispatch => ({

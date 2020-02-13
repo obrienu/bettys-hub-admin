@@ -7,7 +7,8 @@ const CustonInput = ({
   type,
   name,
   placeholder,
-  isRequired
+  isRequired,
+  label
 }) => {
   return (
     <div className="CustomInput">
@@ -18,7 +19,7 @@ const CustonInput = ({
           }
           htmlFor={name}
         >
-          {name.toUpperCase()}
+          {label ? label.toUpperCase() : name.toUpperCase()}
         </label>
       ) : null}
       <input

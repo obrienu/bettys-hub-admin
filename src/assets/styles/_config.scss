@@ -10,6 +10,7 @@ $background_image: linear-gradient(#101116, #140b26, #101116);
 $footer_image: linear-gradient(#060709, #1f103b);
 
 $border: solid $primary_purple 2px;
+$base_border: solid $primary_purple 2px;
 
 @mixin easeOut {
   transition: all 300ms linear;

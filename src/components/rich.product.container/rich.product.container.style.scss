@@ -1,0 +1,29 @@
+@import "./../../assets/styles/config";
+
+.RichProductContainer {
+  width: 98%;
+  margin: 2rem auto;
+  background-color: #fff;
+  @include mediaSm {
+    width: 100%;
+  }
+
+  header.RichProductContainerHeader {
+    font-size: 1.5rem;
+    color: darken($primary_purple, 70);
+    width: 100%;
+    height: 3rem;
+    background-color: $secondary_purple;
+    border-top-left-radius: 5px;
+    line-height: 3rem;
+    padding-left: 1rem;
+  }
+
+  .RichProductContainerProducts {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    overflow-x: auto;
+    justify-content: center;
+  }
+}

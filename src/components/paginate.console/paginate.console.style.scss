@@ -1,0 +1,24 @@
+@import "../../assets/styles/config";
+
+.PaginateConsole {
+  text-align: center;
+  width: 2rem;
+  height: 2rem;
+  color: #fff;
+  background-color: $secondary_purple;
+  line-height: 2rem;
+  margin: 0 0.2rem;
+  @include easeOut;
+  &:hover {
+    cursor: pointer;
+    color: $secondary_purple;
+    background-color: #fff;
+    border: solid 1px $secondary_purple;
+  }
+}
+
+.PaginateConsole.isActive {
+  color: $secondary_purple;
+  background-color: #fff;
+  border: solid 1px $secondary_purple;
+}

@@ -1,0 +1,42 @@
+@import "../../assets/styles/config";
+
+.CollectionOverview {
+  padding: 1rem 0;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column;
+  @include mediaSm {
+    width: 100%;
+  }
+
+  .CollectionOverviewHeader {
+    width: 100%;
+    border-bottom: $base_border;
+    color: $secondary_purple;
+
+    @include mediaSm {
+      padding: 0 1rem;
+    }
+  }
+
+  .CollectionOverviewTop {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .CollectionOverviewBottom {
+    align-items: center;
+    margin: 1rem;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    text-align: center;
+    .PaginationInfo {
+      color: $secondary_purple;
+    }
+  }
+}

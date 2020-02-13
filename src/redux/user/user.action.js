@@ -41,6 +41,7 @@ export const getUser = () => (dispatch, getState) => {
       });
     })
     .catch(err => {
+      console.log(err.response.data);
       getError(err.response.data, err.response.status);
 
       dispatch({
