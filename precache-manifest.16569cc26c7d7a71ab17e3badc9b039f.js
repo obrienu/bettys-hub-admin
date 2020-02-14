@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8530f9ad129b1e9ea09897ba460c65d0",
+    "revision": "2e346f6a545e1b5f1707fcc777730dd4",
     "url": "/bettys-hub-admin/index.html"
   },
   {
-    "revision": "16b0c9d64538c96d1460",
+    "revision": "53c519dc4cfcc0a7ab47",
     "url": "/bettys-hub-admin/static/css/2.47e06e2e.chunk.css"
   },
   {
-    "revision": "5ca41e532cf310316dfb",
+    "revision": "875877d3df83b2f8c3e1",
     "url": "/bettys-hub-admin/static/css/main.f7686863.chunk.css"
   },
   {
-    "revision": "16b0c9d64538c96d1460",
-    "url": "/bettys-hub-admin/static/js/2.eb65af48.chunk.js"
+    "revision": "53c519dc4cfcc0a7ab47",
+    "url": "/bettys-hub-admin/static/js/2.47ccaeec.chunk.js"
   },
   {
     "revision": "1c7f0ad687308896ffe8c0ba36060daa",
-    "url": "/bettys-hub-admin/static/js/2.eb65af48.chunk.js.LICENSE.txt"
+    "url": "/bettys-hub-admin/static/js/2.47ccaeec.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5ca41e532cf310316dfb",
-    "url": "/bettys-hub-admin/static/js/main.932c22f7.chunk.js"
+    "revision": "875877d3df83b2f8c3e1",
+    "url": "/bettys-hub-admin/static/js/main.41d28dbd.chunk.js"
   },
   {
     "revision": "32791e1af3921ca7c5db",
