@@ -7,11 +7,11 @@ import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 ReactDOM.render(
-  <HashRouter basename="/">
-    <Provider store={store}>
+  <Provider store={store}>
+    <HashRouter basename="/">
       <App />
-    </Provider>
-  </HashRouter>,
+    </HashRouter>
+  </Provider>,
   document.getElementById("root")
 );
 
