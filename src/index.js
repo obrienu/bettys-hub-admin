@@ -2,15 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { HashRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 ReactDOM.render(
   <Provider store={store}>
-    <HashRouter basename="/">
+    <Router basename="/bettys-hub-admin">
       <App />
-    </HashRouter>
+    </Router>
   </Provider>,
   document.getElementById("root")
 );
