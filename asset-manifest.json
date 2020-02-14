@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/bettys-hub-admin/static/css/main.f7686863.chunk.css",
-    "main.js": "/bettys-hub-admin/static/js/main.41d28dbd.chunk.js",
-    "main.js.map": "/bettys-hub-admin/static/js/main.41d28dbd.chunk.js.map",
+    "main.js": "/bettys-hub-admin/static/js/main.3f02c6b8.chunk.js",
+    "main.js.map": "/bettys-hub-admin/static/js/main.3f02c6b8.chunk.js.map",
     "runtime-main.js": "/bettys-hub-admin/static/js/runtime-main.bbf8d310.js",
     "runtime-main.js.map": "/bettys-hub-admin/static/js/runtime-main.bbf8d310.js.map",
     "static/css/2.47e06e2e.chunk.css": "/bettys-hub-admin/static/css/2.47e06e2e.chunk.css",
     "static/js/2.47ccaeec.chunk.js": "/bettys-hub-admin/static/js/2.47ccaeec.chunk.js",
     "static/js/2.47ccaeec.chunk.js.map": "/bettys-hub-admin/static/js/2.47ccaeec.chunk.js.map",
     "index.html": "/bettys-hub-admin/index.html",
-    "precache-manifest.16569cc26c7d7a71ab17e3badc9b039f.js": "/bettys-hub-admin/precache-manifest.16569cc26c7d7a71ab17e3badc9b039f.js",
+    "precache-manifest.68b02404ffa2feaa2d971f61e36ad9d4.js": "/bettys-hub-admin/precache-manifest.68b02404ffa2feaa2d971f61e36ad9d4.js",
     "service-worker.js": "/bettys-hub-admin/service-worker.js",
     "static/css/2.47e06e2e.chunk.css.map": "/bettys-hub-admin/static/css/2.47e06e2e.chunk.css.map",
     "static/css/main.f7686863.chunk.css.map": "/bettys-hub-admin/static/css/main.f7686863.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.47e06e2e.chunk.css",
     "static/js/2.47ccaeec.chunk.js",
     "static/css/main.f7686863.chunk.css",
-    "static/js/main.41d28dbd.chunk.js"
+    "static/js/main.3f02c6b8.chunk.js"
   ]
 }
