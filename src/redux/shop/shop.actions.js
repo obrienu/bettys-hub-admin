@@ -44,7 +44,7 @@ export const postCommodity = (shop, body) => (dispatch, getState) => {
   });
 
   axios
-    .post(`/api/${shop}`, body, getHeaderConfig(getState))
+    .post(`https://bettys-api.herokuapp.com/api/${shop}`, body, getHeaderConfig(getState))
     .then(res =>
       dispatch({
         type: POST_SHOP_ITEM,
@@ -64,7 +64,7 @@ export const putCommodity = body => (dispatch, getState) => {
     type: CLEAR_POST_STATUS
   });
   axios
-    .put(`/api/${body.shop}/${body.id}`, body, getHeaderConfig(getState))
+    .put(`https://bettys-api.herokuapp.com/api/${body.shop}/${body.id}`, body, getHeaderConfig(getState))
     .then(res =>
       dispatch({
         type: POST_SHOP_ITEM,
@@ -84,7 +84,7 @@ export const deleteCommodity = body => (dispatch, getState) => {
     type: CLEAR_POST_STATUS
   });
   axios
-    .delete(`/api/${body.shop}/${body.id}`, getHeaderConfig(getState))
+    .delete(`https://bettys-api.herokuapp.com/api/${body.shop}/${body.id}`, getHeaderConfig(getState))
     .then(res =>
       dispatch({
         type: POST_SHOP_ITEM,
@@ -104,7 +104,7 @@ export const getCategory = shop => (dispatch, getState) => {
     type: CLEAR_CATEGORY
   });
   axios
-    .get(`/api/${shop}/category`, getHeaderConfig(getState))
+    .get(`https://bettys-api.herokuapp.com/api/${shop}/category`, getHeaderConfig(getState))
     .then(res =>
       dispatch({
         type: SEARCH_CATEGORY,
@@ -125,7 +125,7 @@ export const searchItems = ({ shop, category, name }, limit, page) => (
   });
   axios
     .get(
-      `/api/${shop}/search?page=${page}&limit=${limit}&name=${name}&category=${category}`,
+      `https://bettys-api.herokuapp.com/api/${shop}/search?page=${page}&limit=${limit}&name=${name}&category=${category}`,
       getHeaderConfig(getState)
     )
     .then(res =>

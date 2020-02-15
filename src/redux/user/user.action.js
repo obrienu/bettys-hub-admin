@@ -33,7 +33,7 @@ export const getUser = () => (dispatch, getState) => {
   });
 
   axios
-    .get("/api/user", getHeaderConfig(getState))
+    .get("https://bettys-api.herokuapp.com/api/user", getHeaderConfig(getState))
     .then(res => {
       dispatch({
         type: USER_LOADED,
@@ -41,7 +41,6 @@ export const getUser = () => (dispatch, getState) => {
       });
     })
     .catch(err => {
-      console.log(err.response.data);
       getError(err.response.data, err.response.status);
 
       dispatch({
@@ -69,7 +68,7 @@ export const registerUser = ({
     adminCode
   };
   axios
-    .post("/api/user/register", body, config)
+    .post("https://bettys-api.herokuapp.com/api/user/register", body, config)
     .then(res => {
       dispatch({
         type: REGISTER_SUCCESS,
@@ -92,7 +91,7 @@ export const userLogin = ({ email, password }) => (dispatch, getState) => {
   const body = { email, password };
   dispatch(clearError());
   axios
-    .post("/api/user/login", body, config)
+    .post("https://bettys-api.herokuapp.com/api/user/login", body, config)
     .then(res => {
       dispatch({
         type: LOGIN_SUCCESS,
