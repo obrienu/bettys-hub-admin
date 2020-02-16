@@ -1,7 +1,6 @@
 import "./add.rich.file.style.scss";
 import React, { Component } from "react";
 import Input from "../../../components/CustomInput/custom.input.component";
-import SelectInput from "../../../components/html.select/select.component";
 import Editor from "../../../components/texteditor/editor.component";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
