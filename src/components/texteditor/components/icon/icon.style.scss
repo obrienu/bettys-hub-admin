@@ -1,5 +1,5 @@
 .EditorIcon {
-  padding: 2px;
+  padding: 2px 8px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,6 +21,9 @@
     background-color: transparent;
     box-shadow: none;
     border: 1px solid #34495e;
+    border-top: none;
+    border-left: none;
+    box-shadow: 2px 2px 2px rgba(15, 15, 15, 0.411);
   }
 
   &.isActive {
@@ -29,5 +32,8 @@
     background-color: transparent;
     box-shadow: none;
     border: 1px solid #34495e;
+    border-top: none;
+    border-left: none;
+    box-shadow: 2px 2px 2px rgba(15, 15, 15, 0.411);
   }
 }

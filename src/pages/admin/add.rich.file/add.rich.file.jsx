@@ -1,25 +1,24 @@
+import "./add.rich.file.style.scss";
 import React, { Component } from "react";
 import Input from "../../../components/CustomInput/custom.input.component";
 import SelectInput from "../../../components/html.select/select.component";
 import Editor from "../../../components/texteditor/editor.component";
-import "./add.file.style.scss";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { postCommodity } from "../../../redux/shop/shop.actions";
+import { postRichProduct } from "../../../redux/shop/shop.actions";
 import { StatusSelector } from "../../../redux/shop/shop.selector";
 import { storage } from "../../../firebase/firebase";
 
-export class AddProduct extends Component {
+export class AddRichProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
-      description: "",
+      text: "",
       price: "",
-      category: "",
-      files: [],
+      imageUrl: null,
       error: "",
-      shop: ""
+      shop: "rich"
     };
   }
 
@@ -29,6 +28,7 @@ export class AddProduct extends Component {
     return storage
       .ref(`images/${shop}/${name}`)
       .put(item)
+
       .then(snapshot => {
         return storage
           .ref(`images/${shop}`)
@@ -44,18 +44,14 @@ export class AddProduct extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    const { postComm } = this.props;
-    const { files, description, name, price, category, shop } = this.state;
-    Promise.all(
-      // Array of "Promises"
-      files.map(item => this.putStorageItem(item, shop))
-    )
+    const { postRichProduct } = this.props;
+    const { imageUrl, text, name, price, shop } = this.state;
+    this.putStorageItem(imageUrl, shop)
       .then(url => {
-        postComm(shop, {
-          description,
+        postRichProduct(shop, {
+          text,
           name,
           price,
-          category,
           imageUrl: url,
           shop
         });
@@ -76,11 +72,9 @@ export class AddProduct extends Component {
       if (status === "Data Posted Successfully") {
         this.setState({
           name: "",
-          description: "",
+          text: "",
           price: "",
-          category: "",
-          files: [],
-          shop: ""
+          imageUrl: null
         });
       }
     }
@@ -95,81 +89,30 @@ export class AddProduct extends Component {
   };
 
   handlefile = event => {
-    const { files, name } = event.target;
-    if (
-      this.maxSelectFile(event) &&
-      this.checkMimeType(event) &&
-      this.checkFileSize(event)
-    ) {
-      let newFiles = this.state.files;
-      switch (name) {
-        case "image1":
-          if (!files[0]) {
-            newFiles = newFiles.filter((file, index) => index !== 0);
-          } else {
-            newFiles[0] = files[0];
-          }
-
-          this.setState({
-            files: [...newFiles],
-            error: ""
-          });
-          break;
-        case "image2":
-          if (!files[0]) {
-            newFiles = newFiles.filter((file, index) => index !== 1);
-          } else {
-            newFiles[1] = files[0];
-          }
-
-          this.setState({
-            files: [...newFiles],
-            error: ""
-          });
-          break;
-        case "image3":
-          if (!files[0]) {
-            newFiles = newFiles.filter((file, index) => index !== 2);
-          } else {
-            newFiles[2] = files[0];
-          }
-
-          this.setState({
-            files: [...newFiles],
-            error: ""
-          });
-          break;
-        default:
-          this.setState({
-            ...this.state
-          });
-      }
-    }
-  };
-
-  maxSelectFile = event => {
-    let files = this.state.files; // create file object
-    if (files.length > 3) {
-      const msg = "Only 3 images can be uploaded at a time";
-      event.target.value = null; // discard selected file
+    const { files } = event.target;
+    if (this.checkMimeType(event) && this.checkFileSize(event)) {
       this.setState({
-        error: msg
+        imageUrl: files[0],
+        error: ""
       });
-      return false;
     }
-    return true;
   };
 
   checkMimeType = event => {
     //getting file object
     let files = event.target.files[0];
-    if (!files) return true;
+
     //define message container
     let err = "";
     // list allow mime type
     const types = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
     // loop access array
-
+    if (!files) {
+      this.setState({
+        error: "Please select an file"
+      });
+      return false;
+    }
     // compare file type find doesn't matach
     if (types.every(type => files.type !== type)) {
       // create error message and assign to container
@@ -180,14 +123,13 @@ export class AddProduct extends Component {
       });
       return false;
     }
-
     return true;
   };
 
   checkFileSize = event => {
     let files = event.target.files[0];
     if (!files) return true;
-    let size = 30000;
+    let size = 40000;
     let err = "";
     if (files.size > size) {
       err += files.type + " is too large, please pick a smaller file";
@@ -202,7 +144,7 @@ export class AddProduct extends Component {
 
   handleEditor = value => {
     this.setState({
-      description: value
+      text: value
     });
   };
 
@@ -215,14 +157,6 @@ export class AddProduct extends Component {
           </h3>
         ) : null}
         <form onSubmit={event => this.handleSubmit(event)}>
-          <SelectInput
-            isRequired={true}
-            label="Selected Shop"
-            options={["", "fabric", "accessories"]}
-            onChange={event => this.handleChange(event)}
-            value={this.state.shop}
-            name="shop"
-          />
           <Input
             isRequired={true}
             name="name"
@@ -237,34 +171,14 @@ export class AddProduct extends Component {
             value={this.state.price}
             type="number"
           />
-          <Input
-            isRequired={true}
-            name="category"
-            onChange={event => this.handleChange(event)}
-            value={this.state.category}
-            type="text"
-          />
-
           <Editor editorChange={this.handleEditor} />
           <Input
             isRequired={true}
-            name="image1"
+            name="imageUrl"
             onChange={event => this.handlefile(event)}
-            value={this.state.image1}
             type="file"
           />
-          <Input
-            name="image2"
-            onChange={event => this.handlefile(event)}
-            value={this.state.image2}
-            type="file"
-          />
-          <Input
-            name="image3"
-            onChange={event => this.handlefile(event)}
-            value={this.state.image3}
-            type="file"
-          />
+
           <input
             style={{ width: "5rem" }}
             type="submit"
@@ -282,6 +196,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDIspatchToProps = dispatch => ({
-  postComm: (shop, body) => dispatch(postCommodity(shop, body))
+  postRichProduct: (shop, body) => dispatch(postRichProduct(shop, body))
 });
-export default connect(mapStateToProps, mapDIspatchToProps)(AddProduct);
+export default connect(mapStateToProps, mapDIspatchToProps)(AddRichProduct);

@@ -7,7 +7,8 @@ import { createStructuredSelector } from "reselect";
 import {
   getCategory,
   searchItems,
-  clearSearchItems
+  clearSearchItems,
+  searchRichItems
 } from "../../../redux/shop/shop.actions";
 import {
   categorySelector,
@@ -82,14 +83,23 @@ export class Homepage extends Component {
         category: "",
         name: ""
       }),
-      () => {
-        this.props.searchItems(this.state.search_param, limit, 1);
-      }
+      () =>
+        shop !== "rich"
+          ? this.props.searchItems(this.state.search_param, limit, 1)
+          : this.props.searchRichItems(this.state.search_param, limit, 1)
     );
   }
 
   paginate(page) {
-    this.props.searchItems(this.state.search_param, this.state.limit, page);
+    if (this.state.shop !== "rich") {
+      this.props.searchItems(this.state.search_param, this.state.limit, page);
+    } else {
+      this.props.searchRichItems(
+        this.state.search_param,
+        this.state.limit,
+        page
+      );
+    }
     this.setState({
       activePage: page
     });
@@ -170,6 +180,8 @@ const mapDIspatchToProps = dispatch => ({
   clearSearchItems: () => dispatch(clearSearchItems()),
   getCategory: shop => dispatch(getCategory(shop)),
   searchItems: (params, limit, page) =>
-    dispatch(searchItems(params, limit, page))
+    dispatch(searchItems(params, limit, page)),
+  searchRichItems: (params, limit, page) =>
+    dispatch(searchRichItems(params, limit, page))
 });
 export default connect(mapStateToProps, mapDIspatchToProps)(Homepage);

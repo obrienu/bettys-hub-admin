@@ -1,7 +1,7 @@
+import "./update.rich.style.scss";
 import React, { Component } from "react";
 import Input from "../../../components/CustomInput/custom.input.component";
 import SelectInput from "../../../components/html.select/select.component";
-import "./update.file.style.scss";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import {
@@ -12,22 +12,21 @@ import {
   StatusSelector,
   itemSelector
 } from "../../../redux/shop/shop.selector";
-import CollectionItem from "../../../components/collection.item/collection.item.component";
+import RichItem from "../../../components/rich.collection.item/richcollection.item.component";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import Editor from "../../../components/texteditor/editor.component";
 import { storage } from "../../../firebase/firebase";
 
-export class UpdateCommodityFile extends Component {
+export class UpdateRichProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
       item: null,
       name: "",
-      description: "",
+      text: "",
       price: "",
-      category: "",
-      imageUrl: [],
+      imageUrl: "",
       error: "",
       shop: ""
     };
@@ -40,21 +39,12 @@ export class UpdateCommodityFile extends Component {
     axios
       .get(`https://bettys-api.herokuapp.com/api/${shop}/${id}`)
       .then(res => {
-        let {
-          name,
-          imageUrl,
-          description,
-          shop,
-          category,
-          price,
-          _id
-        } = res.data;
+        let { name, imageUrl, text, shop, price, _id } = res.data;
         this.setState({
           id: _id,
           name,
-          description,
+          text,
           price,
-          category,
           imageUrl,
           shop
         });
@@ -109,10 +99,8 @@ export class UpdateCommodityFile extends Component {
     event.preventDefault();
     const { shop, id, imageUrl } = this.state;
     const body = { shop, id };
-    Promise.all(
-      // Array of "Promises"
-      imageUrl.map(item => this.deleteFromStorage(item))
-    )
+
+    this.deleteFromStorage(imageUrl)
       .then(url => {
         this.props.deleteCommodity(body);
         this.setState({
@@ -120,7 +108,7 @@ export class UpdateCommodityFile extends Component {
           description: "",
           price: "",
           category: "",
-          imageUrl: [],
+          imageUrl: "",
           shop: ""
         });
       })
@@ -133,22 +121,14 @@ export class UpdateCommodityFile extends Component {
 
   handleEdit = event => {
     event.preventDefault();
-    const {
-      name,
-      shop,
-      price,
-      imageUrl,
-      description,
-      category,
-      id
-    } = this.state;
-    const body = { name, shop, price, imageUrl, description, category, id };
+    const { name, shop, price, imageUrl, text, id } = this.state;
+    const body = { name, shop, price, imageUrl, text, id };
     this.props.putCommodity(body);
   };
 
   handleEditor = value => {
     this.setState({
-      description: value
+      text: value
     });
   };
 
@@ -165,7 +145,7 @@ export class UpdateCommodityFile extends Component {
             <SelectInput
               isRequired={true}
               label="Selected Shop"
-              options={["", "fabric", "accessories"]}
+              options={["", "rich"]}
               onChange={event => this.handleChange(event)}
               value={this.state.shop}
               name="shop"
@@ -184,17 +164,10 @@ export class UpdateCommodityFile extends Component {
               value={this.state.price}
               type="number"
             />
-            <Input
-              isRequired={true}
-              name="category"
-              onChange={event => this.handleChange(event)}
-              value={this.state.category}
-              type="text"
-            />
 
-            {this.state.description ? (
+            {this.state.text ? (
               <Editor
-                editorValue={this.state.description}
+                editorValue={this.state.text}
                 editorChange={this.handleEditor}
               />
             ) : null}
@@ -216,7 +189,7 @@ export class UpdateCommodityFile extends Component {
           </form>
         </div>
         <div className="AddCommodityItem">
-          {this.state.item ? <CollectionItem item={this.state.item} /> : null}
+          {this.state.item ? <RichItem item={this.state.item} /> : null}
         </div>
       </div>
     );
@@ -233,5 +206,5 @@ const mapDIspatchToProps = dispatch => ({
   deleteCommodity: body => dispatch(deleteCommodity(body))
 });
 export default withRouter(
-  connect(mapStateToProps, mapDIspatchToProps)(UpdateCommodityFile)
+  connect(mapStateToProps, mapDIspatchToProps)(UpdateRichProduct)
 );
