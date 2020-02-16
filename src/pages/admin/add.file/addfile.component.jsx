@@ -3,7 +3,7 @@ import Input from "../../../components/CustomInput/custom.input.component";
 import SelectInput from "../../../components/html.select/select.component";
 import TextArea from "../../../components/custom.textarea/custom.textarea.component";
 //import axios from "axios";
-//import Editor from "../../../components/texteditor/editor.component";
+import Editor from "../../../components/texteditor/editor.component";
 import "./add.file.style.scss";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -203,11 +203,11 @@ export class AddFile extends Component {
     return true;
   };
 
-  /*  getEditorContent = content => {
+  handleEditor = value => {
     this.setState({
-      description: content
+      description: value
     });
-  }; */
+  };
 
   render() {
     return (
@@ -247,14 +247,14 @@ export class AddFile extends Component {
             value={this.state.category}
             type="text"
           />
-          <TextArea
+          {/*  <TextArea
             placeholder="Description"
             isRequired={true}
             name="description"
             onChange={event => this.handleChange(event)}
             value={this.state.description}
-          />
-          {/*  <Editor getEditorContent={this.getEditorContent} /> */}
+          /> */}
+          <Editor editorChange={this.handleEditor} />
           <Input
             isRequired={true}
             name="image1"

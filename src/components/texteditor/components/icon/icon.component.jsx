@@ -8,6 +8,7 @@ const Icon = props => {
 
   return (
     <div
+      title={props.style}
       onClick={handleClick}
       className={props.isActive ? "EditorIcon isActive" : "EditorIcon"}
     >

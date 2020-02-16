@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Input from "../../../components/CustomInput/custom.input.component";
 import SelectInput from "../../../components/html.select/select.component";
-import TextArea from "../../../components/custom.textarea/custom.textarea.component";
+//import TextArea from "../../../components/custom.textarea/custom.textarea.component";
 import "./update.file.style.scss";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -16,6 +16,8 @@ import {
 import CollectionItem from "../../../components/collection.item/collection.item.component";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+import Editor from "../../../components/texteditor/editor.component";
+import { storage } from "../../../firebase/firebase";
 
 export class AddFile extends Component {
   constructor(props) {
@@ -37,9 +39,9 @@ export class AddFile extends Component {
     const id = match.params.commId;
     const shop = match.params.shopId;
     axios
-      .get(`/api/${shop}/${id}`)
+      .get(`https://bettys-api.herokuapp.com/api/${shop}/${id}`)
       .then(res => {
-        const {
+        let {
           name,
           imageUrl,
           description,
@@ -58,11 +60,11 @@ export class AddFile extends Component {
           shop
         });
       })
-      .catch(err =>
+      .catch(err => {
         this.setState({
           error: err.response.data
-        })
-      );
+        });
+      });
   }
 
   componentDidUpdate(prevProps) {
@@ -88,19 +90,46 @@ export class AddFile extends Component {
     });
   };
 
+  deleteFromStorage = url => {
+    const imageRef = url
+      .substring(url.indexOf("images"), url.indexOf("?"))
+      .replace(/%2f/gi, "/");
+    return storage
+      .ref()
+      .child(imageRef)
+      .delete()
+      .then(() => {})
+      .catch(err =>
+        this.setState({
+          error: "Failed to delete file"
+        })
+      );
+  };
+
   handleDelete = event => {
     event.preventDefault();
-    const { shop, id } = this.state;
+    const { shop, id, imageUrl } = this.state;
     const body = { shop, id };
-    this.props.deleteCommodity(body);
-    this.setState({
-      name: "",
-      description: "",
-      price: "",
-      category: "",
-      imageUrl: [],
-      shop: ""
-    });
+    Promise.all(
+      // Array of "Promises"
+      imageUrl.map(item => this.deleteFromStorage(item))
+    )
+      .then(url => {
+        this.props.deleteCommodity(body);
+        this.setState({
+          name: "",
+          description: "",
+          price: "",
+          category: "",
+          imageUrl: [],
+          shop: ""
+        });
+      })
+      .catch(error =>
+        this.setState({
+          error: "Failed to delete file"
+        })
+      );
   };
 
   handleEdit = event => {
@@ -116,6 +145,12 @@ export class AddFile extends Component {
     } = this.state;
     const body = { name, shop, price, imageUrl, description, category, id };
     this.props.putCommodity(body);
+  };
+
+  handleEditor = value => {
+    this.setState({
+      description: value
+    });
   };
 
   render() {
@@ -157,13 +192,19 @@ export class AddFile extends Component {
               value={this.state.category}
               type="text"
             />
-            <TextArea
+            {/* <TextArea
               placeholder="Description"
               isRequired={true}
               name="description"
               onChange={event => this.handleChange(event)}
               value={this.state.description}
-            />
+            /> */}
+            {this.state.description ? (
+              <Editor
+                editorValue={this.state.description}
+                editorChange={this.handleEditor}
+              />
+            ) : null}
 
             <input
               onClick={this.handleEdit}

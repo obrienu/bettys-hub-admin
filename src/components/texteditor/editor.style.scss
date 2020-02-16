@@ -12,7 +12,19 @@
   border-radius: 00 3px 3px;
   background-color: #fff;
   padding: 5px;
+  padding-left: 1rem;
   font-size: 0.8rem;
   font-weight: 300;
   box-shadow: 0px 0px 3px 1px rgba(15, 15, 15, 0.17);
+  overflow: hidden;
+}
+
+.superFancyBlockquote {
+  color: #999;
+  font-family: "Hoefler Text", Georgia, serif;
+  font-style: italic;
+  text-align: center;
+}
+.myUnorderedListItem {
+  margin-left: 1rem;
 }

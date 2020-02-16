@@ -8,6 +8,18 @@ export const styleMap = {
     fontSize: 16,
     padding: 2,
     color: "#fff"
+  },
+  HIGHLIGHT: {
+    backgroundColor: "yellow"
+  }
+};
+
+export const myBlockStyleFn = contentBlock => {
+  const type = contentBlock.getType();
+  if (type === "blockquote") {
+    return "superFancyBlockquote";
+  } else if (type === "unordered-list-item" || type === "ordered-list-item") {
+    return "myUnorderedListItem";
   }
 };
 

@@ -3,19 +3,22 @@ import {
   EditorState,
   Editor as DraftEditor,
   RichUtils,
-  convertToRaw
+  convertToRaw,
+  convertFromRaw
 } from "draft-js";
 import "./editor.style.scss";
 import ToolBar from "./components/toolbar/toolbar.component";
-import { styleMap } from "./assets/editorstyleFunction";
+import { styleMap, myBlockStyleFn } from "./assets/editorstyleFunction";
 
 export class Editor extends Component {
   constructor(props) {
     super(props);
-    this.state = { editorState: EditorState.createEmpty() };
+    this.state = {
+      editorState: EditorState.createEmpty()
+    };
     this.onChange = editorState => {
       this.setState({ editorState });
-      this.props.getEditorContent(
+      this.props.editorChange(
         JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()))
       );
     };
@@ -48,6 +51,15 @@ export class Editor extends Component {
     return style === blockType;
   }
 
+  componentDidMount() {
+    if (this.props.editorValue) {
+      let contentState = convertFromRaw(JSON.parse(this.props.editorValue));
+      this.setState({
+        editorState: EditorState.createWithContent(contentState)
+      });
+    }
+  }
+
   render() {
     return (
       <div className="EditorContainer">
@@ -59,8 +71,9 @@ export class Editor extends Component {
         />
         <div className="EditorWrapper">
           <DraftEditor
+            blockStyleFn={myBlockStyleFn}
             customStyleMap={styleMap}
-            placeholder="Explore Text ................"
+            placeholder="Description ................"
             editorState={this.state.editorState}
             onChange={this.onChange}
           />
